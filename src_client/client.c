@@ -6,7 +6,7 @@
 /*   By: anporced <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 21:48:09 by anporced          #+#    #+#             */
-/*   Updated: 2024/03/15 22:49:17 by anporced         ###   ########.fr       */
+/*   Updated: 2024/03/15 23:08:06 by anporced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	send_bit(int pid, unsigned char byte, int bit_index)
 		ft_error();
 }
 
-void	ft_handler(int sig)
+void	signal_handler(int sig)
 {
 	(void)sig;
 	g_state = 1;
@@ -79,7 +79,7 @@ int	main(int argc, char **argv)
 	}
 	pid = ft_atoi(argv[1]);
 	message = (unsigned char *)argv[2];
-	signal(SIGUSR1, ft_handler);
+	signal(SIGUSR1, signal_handler);
 	signal(SIGUSR2, message_received_handler);
 	send_message(pid, message);
 	return (0);

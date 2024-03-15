@@ -6,7 +6,7 @@
 /*   By: anporced <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 21:48:41 by anporced          #+#    #+#             */
-/*   Updated: 2024/03/15 22:29:12 by anporced         ###   ########.fr       */
+/*   Updated: 2024/03/15 23:04:53 by anporced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_add_char_to_buffer(char **buffer, char c, size_t *len)
 	*buffer = new_buffer;
 }
 
-void	ft_handler(int sig, siginfo_t *info, void *context)
+void	signal_handler(int sig, siginfo_t *info, void *context)
 {
 	static int		bit_count = 0;
 	static char		char_assembled = 0;
@@ -64,7 +64,7 @@ int	main(void)
 	struct sigaction	sa;
 
 	sa.sa_flags = SA_SIGINFO;
-	sa.sa_sigaction = ft_handler;
+	sa.sa_sigaction = signal_handler;
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);

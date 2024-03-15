@@ -6,7 +6,7 @@
 /*   By: anporced <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:56:26 by anporced          #+#    #+#             */
-/*   Updated: 2024/03/05 15:54:08 by anporced         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:23:48 by anporced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_bzero(void *s, size_t n);
 void	*ft_memset(void *pointer, int value, size_t count);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
+int		ft_memlen(void	*memory);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 

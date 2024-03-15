@@ -1,46 +1,45 @@
-NAME	=	push_swap
-NAME_BONUS = checker
+SERVER_NAME	=	server
+CLIENT_NAME =	client
 CC		=	cc
 FLAGS 	=	-g -Wall -Werror -Werror
 LIBFT_PATH = libft/
 LIBFT_FILE = libft/libft.a
 
-SRC		=	$(wildcard src/*.c)
-OBJ		=	$(patsubst %.c,%.o,$(SRC))
-SRC_BONUS = $(wildcard src_bonus/*.c)
-OBJ_BONUS =	$(patsubst %.c,%.o,$(SRC_BONUS))
-RM 		=	rm -f
+SERVER_SRC		=	$(wildcard src_server/*.c)
+CLIENT_SRC		=	$(wildcard src_client/*.c)
+SERVER_OBJ		=	$(patsubst %.c,%.o,$(SERVER_SRC))
+CLIENT_OBJ		=	$(patsubst %.c,%.o,$(CLIENT_SRC))
+RM				=	rm -f
 
 .SUFFIXES: .c .o
 
-$(NAME): $(OBJ)
+$(SERVER_NAME): $(SERVER_OBJ)
 	make -C libft/
-	$(CC) $(FLAGS) $(OBJ) $(LIBFT_FILE) -o $(NAME) -I includes/
+	$(CC) $(FLAGS) $(SERVER_OBJ) $(LIBFT_FILE) -o $(SERVER_NAME) -I includes/
+
+$(CLIENT_NAME): $(CLIENT_OBJ)
+	make -C libft/
+	$(CC) $(FLAGS) $(CLIENT_OBJ) $(LIBFT_FILE) -o $(CLIENT_NAME) -I includes/
 
 %.o: %.c
 	$(CC) $(FLAGS) -c $< -o $@ -I includes/
 
 
-all: $(NAME)
-
-bonus: $(NAME_BONUS)
-$(NAME_BONUS): $(OBJ_BONUS)
-	make -C libft/
-	$(CC) $(FLAGS) $(OBJ_BONUS) $(LIBFT_FILE) -o $(NAME_BONUS) -I includes/
+all: $(CLIENT_NAME) $(SERVER_NAME)
 
 clean:
 	echo "Deleting Obj file in $(LIBFT_PATH)...\n"
 	make clean -sC $(LIBFT_PATH)
 	@echo "Done\n"
-	@echo "Deleting Push Swap object...\n"
-	rm -f $(OBJ)
-	rm -f $(OBJ_BONUS)
+	@echo "Deleting Minitalk object...\n"
+	rm -f $(SERVER_OBJ)
+	rm -f $(CLIENT_OBJ)
 	@echo "Done\n"
 
 fclean: clean
-	@echo "Deleting Push_Swap executable..."
-	rm -f $(NAME)
-	rm -f $(NAME_BONUS)
+	@echo "Deleting Minitalk executable..."
+	rm -f $(SERVER_NAME)
+	rm -f $(CLIENT_NAME)
 	make fclean -C $(LIBFT_PATH)
 	@echo "Done\n"
 
